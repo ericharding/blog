@@ -3,9 +3,11 @@ base_url = "https://blog.digitalsorcery.net"
 compile_sass = true
 highlight_code = true
 build_search_index = false
-
+generate_rss = true
 title = "Blog"
 theme="hyde"
+
+# build_timestamp = set by zola. Could be used for improved auto refresh
 
 [extra]
 hyde_sticky = true
