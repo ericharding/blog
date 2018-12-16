@@ -12,5 +12,11 @@ hyde_sticky = true
 hyde_reverse = false
 hyde_theme = ""
 hyde_links = [
-    {url = "https://google.com", name = "About"},
+    {url = "/about.html", name = "About", icon="fas fa-id-badge"},
+    {url = "/blog", name = "Blog", icon="fas fa-pencil-alt"},
+    {url = "/resume.html", name = "Resume", icon="fas fa-file"},
+    {url = "https://twitter.com/digitalsorcery", name = "@digitalsorcery", icon="fab fa-twitter"},
+    {url = "#?", name = "Feed", icon="fas fa-rss"},
+    {url = "#?", name = "Email", icon="fas fa-at"},
+    
 ]

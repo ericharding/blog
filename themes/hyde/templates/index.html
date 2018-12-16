@@ -15,6 +15,9 @@
       <link rel="stylesheet" href="{{ get_url(path="hyde.css", trailing_slash=false) }}">
       <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
 
+      <!-- font awesome -->
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+
       {% if config.generate_rss %}
         <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ get_url(path="rss.xml", trailing_slash=false) }}">
       {% endif %}
@@ -39,7 +42,10 @@
                     <ul class="sidebar-nav">
                         {% block sidebar_nav %}
                         {% for link in config.extra.hyde_links %}
-                        <li class="sidebar-nav-item"><a href="{{link.url}}">{{link.name}}</a></li>
+                        <li class="sidebar-nav-item">
+                            {% if link.icon %} <i class="{{link.icon}}"></i> {% endif %}
+                            <a href="{{link.url}}">{{link.name}}</a>
+                        </li>
                         {% endfor %}
                         {% endblock sidebar_nav %}
                     </ul>
