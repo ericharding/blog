@@ -5,15 +5,12 @@ highlight_code = true
 build_search_index = false
 generate_rss = true
 title = "Blog"
-description = "description"
-#theme="hyde"
-
+#description = "description"
 # build_timestamp = set by zola. Could be used for improved auto refresh
 
 [extra]
 hyde_sticky = true
 hyde_reverse = false
-hyde_theme = ""
 hyde_links = [
     {url = "/about", name = "About", icon="fas fa-id-badge"},
     {url = "/blog", name = "Blog", icon="fas fa-pencil-alt"},
