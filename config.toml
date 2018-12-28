@@ -14,6 +14,7 @@ hyde_reverse = false
 hyde_links = [
     {url = "/about", name = "About", icon="fas fa-id-badge"},
     {url = "/blog", name = "Blog", icon="fas fa-pencil-alt"},
+    {url = "https://www.linkedin.com/in/erharding/", name="Linkedin", icon="fab fa-linkedin"},
     #{url = "/resume", name = "Resume", icon="fas fa-file"},
     {url = "https://twitter.com/digitalsorcery", name = "@digitalsorcery", icon="fab fa-twitter"},
     {url = "/rss.xml", name = "Feed", icon="fas fa-rss"},
