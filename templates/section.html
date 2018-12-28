@@ -1,14 +1,17 @@
 {% extends "index.html" %}
 {% block content %}
-{% for page in section.pages %}
+{% for page in section.pages | reverse %}
 <div class="post">
   <h1 class="post-title">
-    <a href="{{page.permalink}}">
+    <a href="{{page.permalink}}#continue-reading">
     {{ page.title }}
+    {% if page.draft %}
+     - DRAFT
+    {% endif %}
     </a>
   </h1>
   <span class="post-date">{{ page.date | date(format="%Y-%m-%d") }}</span>
-  {{ page.content | safe }}
+  {{ page.summary | safe }}
 <hr>
 </div>
 {%endfor %}

@@ -14,9 +14,9 @@ hyde_reverse = false
 hyde_links = [
     {url = "/about", name = "About", icon="fas fa-id-badge"},
     {url = "/blog", name = "Blog", icon="fas fa-pencil-alt"},
-    {url = "/resume", name = "Resume", icon="fas fa-file"},
+    #{url = "/resume", name = "Resume", icon="fas fa-file"},
     {url = "https://twitter.com/digitalsorcery", name = "@digitalsorcery", icon="fab fa-twitter"},
-    {url = "#?", name = "Feed", icon="fas fa-rss"},
+    {url = "/rss.xml", name = "Feed", icon="fas fa-rss"},
     {url = "mailto:eric@digitalsorcery.net", name = "Email", icon="fas fa-at"},
     
 ]
