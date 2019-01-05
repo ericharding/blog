@@ -1,6 +1,7 @@
 +++
 title="Why Start a Blog?"
 date=2018-12-29
+tags=["Learning"]
 +++
 
 Starting a blog is a little bit uncomfortable.  I'm not quite sure what mode I should be in when starting to write a blog post. Is this informal like an email or is it more like an essay?  Am I supposed to follow the 5 paragraph essay format? (probably not)
