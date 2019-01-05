@@ -1,7 +1,6 @@
 +++
 title="New Years Resolution?"
 date=2019-01-04
-draft=true
 +++
 
 Ok... You might not believe this but despite the date I did *not* start this blog as a new years resolution.
