@@ -1,16 +1,15 @@
 {% extends "index.html" %}
 {% block content %}
-{% for page in section.pages %}
+{% for page in section.pages | filter (attribute="draft",value=false) %}
 <div class="post">
   <h1 class="post-title">
     <a href="{{page.permalink}}#continue-reading">
     {{ page.title }}
-    {% if page.draft %} - DRAFT {% endif %}
     </a>
   </h1>
   <span class="post-date">{{ page.date | date(format="%Y-%m-%d") }}</span>
   {{ page.summary | safe }}
-  <a href="{{ page.permalink}}#continue-reading">~{{page.reading_time}} Minutes...</a>
+  <a href="{{ page.permalink}}#continue-reading">{{page.reading_time}} Minute Read...</a>
   <hr>
 </div>
 {%endfor %}

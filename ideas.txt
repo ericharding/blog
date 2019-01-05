@@ -9,4 +9,12 @@
 * PublishingFableReactComponent
 
 
+====================
+todo:
+* Filter draft=true from everywhere
+  -- why is it here?
+* bug:
+    - flipping draft true/false doesn't refresh index
 
+done:
+    * reading time
