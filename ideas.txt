@@ -1,4 +1,5 @@
 * Mozilla bug
+* Type driven blogging (how I think about writing)
 * How start a blog? (zola)
 
 * Why 'digital sorcery'
