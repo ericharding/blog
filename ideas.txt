@@ -1,5 +1,4 @@
 * Mozilla bug
-* Type driven blogging (how I think about writing)
 * How start a blog? (zola)
 
 * Why 'digital sorcery'
@@ -7,6 +6,7 @@
 * Conference
 * Null as wishful programming
 * Elmish tutorial series
+  - can I use zola shortcodes to switch language examples?
 * PublishingFableReactComponent
 
 
