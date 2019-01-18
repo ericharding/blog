@@ -12,7 +12,7 @@ Writing for a blog post is different than writing an email or text message or so
 
 The one thing that I write regularly that **does** require structure is code.  I think there might be some interesting parallels here.  When I start to write a function or a module I will often "stub out" large portions of it with empty functions or write in shorthand what I plan to write.  To come up with a successful solution to a problem you have to break it down into smaller and smaller pieces.  By scaffolding the solution with blank functions you figure out the shape of your solution and then you can go back and fill in the details. Once the problem is broken down into small enough pieces each piece becomes simple.
 
-```csharp
+```cs
 void DrawLine(startX, startY, endX, endY) {
     //todo
 }
