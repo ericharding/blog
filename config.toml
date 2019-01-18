@@ -5,7 +5,8 @@ highlight_code = true
 build_search_index = false
 generate_rss = true
 title = "Blog"
-# description = "Despite apperances, this is not an F# blog."
+# description = "Engineering Simplicity"
+description = "Essential Complexity"
 
 [extra]
 hyde_sticky = true
