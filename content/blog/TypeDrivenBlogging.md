@@ -4,7 +4,7 @@ date=2019-01-14
 draft=false
 +++
 
-I haven't done a lot of writing in the past few years and I'm still getting into the swing of things.  I'm spending a surprising (at least to me) amount of time analyzing what goes on in my head when it comes time to write a blog post.  I'm generally a very introspective person so this is probably a healthy thing. 😄
+I haven't done a lot of writing in the past few years and I'm still getting into the swing of things.  I'm spending a surprising (at least to me) amount of time analyzing what goes on in my head when it comes time to write a blog post.  I'm generally a very introspective person so this is probably good for me. 😄
 
 <!-- more -->
 
@@ -33,5 +33,3 @@ void DrawRobot(Point position) {
 Writing a good blog post also needs structure so it makes sense to structure the post using the same techniques as I might use to structure code.  Start by building a scaffold of how the post will look when done.  Do this by writing down the main idea and then expand to a single sentance per paragraph.  One that's done you can revisit each paragraph and flesh it out.  Just as with code it makes sense to move back and forth through the project tweaking earlier paragraphs as the following paragraphs make the requirements of the preceding ones more clear.
 
 On the other hand... sometimes a blog post is just rambling and that's ok too. 
-
-
