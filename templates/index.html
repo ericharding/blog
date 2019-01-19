@@ -77,7 +77,11 @@
 
                         <span class="post-date">{{ page.date | date(format="%Y-%m-%d") }}</span>
                         {{ page.summary | safe }}
+                        {%if page.reading_time%}
                         <a href="{{ page.permalink}}#continue-reading">{{page.reading_time}} Minute Read...</a>
+                        {%else%}
+                        <a href="{{ page.permalink}}#continue-reading">More...</a>
+                        {%endif%}
                         <hr>
                       </div>
                     {% endfor %}

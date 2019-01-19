@@ -1,0 +1,6 @@
+#!/bin/bash
+cd ..
+zola.exe build
+cd public
+rsync -avzL . eric@blog.digitalsorcery.net://www/blog/
+

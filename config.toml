@@ -5,14 +5,16 @@ highlight_code = true
 build_search_index = false
 generate_rss = true
 title = "Blog"
-# description = "Despite apperances, this is not an F# blog."
+# description = "Engineering Simplicity"
+description = "Essential Complexity"
 
 [extra]
 hyde_sticky = true
 hyde_reverse = false
 hyde_links = [
     {url = "/about", name = "About", icon="fas fa-id-badge"},
-    {url = "/blog", name = "Blog", icon="fas fa-pencil-alt"},
+    #{url = "/blog", name = "Blog", icon="fas fa-pencil-alt"},
+    {url = "https://github.com/ericharding/", name = "Github", icon="fab fa-github-square" },
     {url = "https://www.linkedin.com/in/erharding/", name="Linkedin", icon="fab fa-linkedin"},
     #{url = "https://hardingtech.net", name="Harding Technology LLC", icon="fas fa-briefcase"},
     #{url = "/resume", name = "Resume", icon="fas fa-file"},
