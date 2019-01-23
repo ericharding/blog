@@ -15,3 +15,6 @@ If you're a developer using Windows you should know about ETW (Event Tracing for
 * I used these tools /techniques
 * Getting this much information for this little effort is magical
 * ETW can do the same thing for your application(s)
+
+
+https://bugzilla.mozilla.org/show_bug.cgi?id=1517488
