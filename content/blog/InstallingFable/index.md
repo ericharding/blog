@@ -40,7 +40,10 @@ The C# extension is needed because it includes debugger support for .net core.  
 
 At this point you have a working F# compiler and IDE.  The only thing missing is the [F# interactive](https://docs.microsoft.com/en-us/dotnet/fsharp/tutorials/fsharp-interactive/) REPL (read-eval-print loop) which is not available in .NET Core **yet** (work is underway).
 
+## Step 3 - F# Interactive 
+
 To enable F# interactive you need either the [Visual Studio Build Tools](https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=BuildTools&rel=15) {{icon(name="fab fa-windows")}} or [Mono](https://www.mono-project.com/download/stable/#download-mac) {{icon(name="fas fa-apple-alt")}}{{icon(name="fab fa-linux")}}.
+
 ### Visual Studio Build Tools  (Windows)
 * Download and launch [vs_buildtools.exe](https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=BuildTools&rel=15)
 * Select the 'Individual components' tab along the top of the top of the installer.
@@ -61,7 +64,7 @@ To enable F# interactive you need either the [Visual Studio Build Tools](https:/
 * Restart or Reload Visual Studio Code
 
 # Interlude
-Now we have a complete F# development environment.  Lets take it for a spin before we move on to installing Fable.
+Now we have a complete F# development environment.  Lets take it for a spin before we install Fable.
 
 If you have any command prompts open from before install you should close and re-open them to update the path environment variable.
 
