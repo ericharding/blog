@@ -1,12 +1,12 @@
 +++
 title="F# and Fable Installfest 2019"
 date=2019-02-01
-draft=true
+draft=false
 +++
 
 Starting from scratch lets set up a development environment for F#.  Following this will get you completely set up for command line tools, servers and web UI development.  I will not be covering desktop or mobile development but you should know that F# also excels in those domains.
 
-I will go thorugh setting up Visual Studio Code because that's what I use.  You could also use [Visual Studio](https://visualstudio.microsoft.com/) or [Jetbrains Rider](https://www.jetbrains.com/rider/).  
+I will go through setting up Visual Studio Code because that's what I use.  You could also use [Visual Studio](https://visualstudio.microsoft.com/) or [Jetbrains Rider](https://www.jetbrains.com/rider/).  
 
 <!-- more -->
 
@@ -16,7 +16,7 @@ If you're on MacOS {{icon(name="fas fa-apple-alt")}} (or Linux {{icon(name="fab 
 # Install F# with .net core
 
 ## Step 1 - Install .NET Core SDK
-The first thing you need to do is install the .NET Core SDK.  This gives you a set of command line tools for creating projects managing depdendencies and building.
+The first thing you need to do is install the .NET Core SDK.  This gives you a set of command line tools for creating projects managing dependencies and building.
 
 Go to [http://dot.net](http://dot.net) and click download then choose "Download .NET Core SDK".  It should automatically select the right version for the OS you're running.  When you install it should automatically add the `dotnet` command to your path.  
 
@@ -30,15 +30,17 @@ If you're feeling impatient you can go ahead and start on step 2 while the downl
 
 * Install Visual Studio Code from [http://code.visualstudio.com](https://code.visualstudio.com/)
 * Inside VSCode click the puzzle piece on the left to open the extensions panel ![puzzle piece?](puzzle_piece.png)
-  Then install the Ionide:
+  Then install Ionide-fsharp:
   ![ionide](ionide.png)
   and C# extensions:
   ![csharp](csharp.png)
   When both extensions are installed click 'reload'
 
-The C# extension is needed because it includes debugger support for .net core.  Ionide has all the language support for F# syntax coloring and code completion.
+You are welcome to install the Ionide-Paket and Ionide-FAKE packages as well but they aren't required. Ionide-fsharp has all the language support for F# syntax coloring and code completion.
 
-At this point you have a working F# compiler and IDE.  The only thing missing is the [F# interactive](https://docs.microsoft.com/en-us/dotnet/fsharp/tutorials/fsharp-interactive/) REPL (read-eval-print loop) which is not available in .NET Core **yet** (work is underway).
+The C# extension is needed because it includes debugger support for .net core. 
+
+At this point you have a working F# compiler and IDE.  The only thing missing is the [F# interactive](https://docs.microsoft.com/en-us/dotnet/fsharp/tutorials/fsharp-interactive/) REPL (read-eval-print loop) which is not available in .NET Core **yet**.  Work is underway to support this so step 3 may not be necessary some time in the next few months
 
 ## Step 3 - F# Interactive 
 
@@ -64,9 +66,10 @@ To enable F# interactive you need either the [Visual Studio Build Tools](https:/
 * Restart or Reload Visual Studio Code
 
 # Interlude
-Now we have a complete F# development environment.  Lets take it for a spin before we install Fable.
+Now we have a complete F# development environment.  Lets take it for a spin before we install Fable.  The rest of this section assumes you have a command prompt available.  On Windows either Cmd.exe (`Command Prompt`) or PowerShell.  On a mac I believe `Terminal` is what you want.
 
 If you have any command prompts open from before install you should close and re-open them to update the path environment variable.
+
 
 Lets create a new project using the dotnet command line tool.
 
@@ -74,7 +77,7 @@ Lets create a new project using the dotnet command line tool.
 c:\Users\F# User> cd Documents
 c:\Users\F# User> mkdir TestProject
 c:\Users\F# User> cd TestProject
-c:\Users\F# User> dotnet new console -lang f# -n MyApp
+c:\Users\F# User\TestProject> dotnet new console -lang f# -n MyApp
 The template "Console Application" was created successfully.
 
 Processing post-creation actions...
@@ -86,8 +89,8 @@ Running 'dotnet restore' on MyApp\MyApp.fsproj...
 
 Restore succeeded.
 
-c:\Users\F# User> cd MyApp
-c:\Users\F# User\MyApp> 
+c:\Users\F# User\TestProject> cd MyApp
+c:\Users\F# User\TestProject\MyApp> 
 ```
 To build the app just use `dotnet build`.  To run it use `dotnet run`.  Run will automatically build the app if it is out of date.
 ```cmd
@@ -119,6 +122,13 @@ printfn "Hello world from F#"
 =======
 
 # Fable
+
+## Step 1 - Install Node
+
+Head over to [http://nodejs.org/](http://nodejs.org) and get the installer.  Either the LTS or Current version is fine.  If you're not sure choose LTS.
+
+## Step 2 - Install yarn
+
 
 * Install node
     - https://nodejs.org/en/
