@@ -10,6 +10,8 @@
   - can I use zola shortcodes to switch language examples?
 * why Digitalsorcery
 
+* Using ML for bookkeeping
+ -- http://www.codesuji.com/2018/06/23/F-and-MLNet-Classification/
 
 ====================
 todo:
