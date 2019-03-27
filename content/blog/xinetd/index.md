@@ -1,8 +1,9 @@
 +++
-title="Using xinetd for Automatic Deployment"
+title="Using Xinetd and Github Hooks for Automatic Deployment"
 date=2019-03-30
 draft=true
 +++
+
 
 # Pulling from GitHub
 https://github.blog/2015-06-16-read-only-deploy-keys/
