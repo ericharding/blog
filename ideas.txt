@@ -1,13 +1,14 @@
-* Mozilla bug
+* Mozilla bug (etw)
 * How start a blog? (zola)
+* super low latency performance tracing
+* AI personal accounting
 
-* Why 'digital sorcery'
 
-* Conference
+* Conference - PublishingFableReactComponent
 * Null as wishful programming
 * Elmish tutorial series
   - can I use zola shortcodes to switch language examples?
-* PublishingFableReactComponent
+* why Digitalsorcery
 
 
 ====================
