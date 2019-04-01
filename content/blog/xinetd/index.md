@@ -3,9 +3,9 @@ title="Using Xinetd with Github Hooks"
 date=2019-03-30
 +++
 
-Recently needed an easy way to collaborate on a static html site (yes, plain old html).  I wanted it to be really easy to deploy so using a github with a hook seemed like a natural option. 
+Recently needed an easy way to collaborate on a static html site (yes, plain old html).  I wanted it to be really easy to deploy so using a GitHub with a hook seemed like a natural option. 
 
-It seems gratuitous to run a service just to handle a single endpoint and do a pull. The site was static so it didn't need anything other than nginx and it was running on a VPS so I wanted to use as little memory as possible.
+It seems gratuitous to run a service just to handle a single endpoint and do a pull. The site was static so it didn't need anything other than NGINX and it was running on a VPS so I wanted to use as little memory as possible.
 
 Looking around I found a few scripts that would work but even the smallest one (python) seemed to use about 18mb of ram when running.  I also didn't know the pedigree of these scripts and didn't want to have to babysit them if they weren't completely stable.
 
@@ -13,9 +13,9 @@ Looking around I found a few scripts that would work but even the smallest one (
 
 # Enter xinetd  
 
-[xinetd](https://en.wikipedia.org/wiki/Xinetd) is an internet [super-server](https://en.wikipedia.org/wiki/Super-server) which was originally written in 2003ish (it predates npm by years) to replace ined and is still maintained and included in almost every linux distribution. It's also written in plain C so it only uses 2mb of ram when running.
+[xinetd](https://en.wikipedia.org/wiki/Xinetd) is an internet [super-server](https://en.wikipedia.org/wiki/Super-server) which was originally written in 2003ish (it predates npm by years) to replace ined and is still maintained and included in almost every Linux distribution. It's also written in plain C so it only uses 2mb of ram when running.
 
-Xinetd works in the unix tradition of doing one simple thing and doing it well.  It will listen on a port (in our case a TCP port) and when something connects it will start a process of your choosing and map stdin/stdout to that socket.  That's it!  Your processes doesn't have to understand sockets or.... TODO
+Xinetd works in the Unix tradition of doing one simple thing and doing it well.  It will listen on a port (in our case a TCP port) and when something connects it will start a process of your choosing and map stdin/stdout to that socket.  That's it!  Your processes doesn't have to understand sockets or.... TODO
 
 ## Configure nginx
 
