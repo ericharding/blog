@@ -1,27 +1,27 @@
 +++
-title="Using Xinetd with Github Hooks"
-date=2019-03-30
+title="Using Xinetd with GitHub Hooks"
+date=2019-04-04
 +++
 
-Recently needed an easy way to collaborate on a static html site (yes, plain old html).  I wanted it to be really easy to deploy so using a GitHub with a hook seemed like a natural option. 
+Recently, I needed to set up a static site and have it automatically update when I push changes to git.
 
-It seems gratuitous to run a service just to handle a single endpoint and do a pull. The site was static so it didn't need anything other than NGINX and it was running on a VPS so I wanted to use as little memory as possible.
+It seems gratuitous to run a service to handle a single endpoint and do a pull. The site was static so it didn't need anything other than NGINX and it was running on a VPS so I wanted to use as little memory as possible.
+<!-- more --> 
 
 Looking around I found a few scripts that would work but even the smallest one (python) seemed to use about 18mb of ram when running.  I also didn't know the pedigree of these scripts and didn't want to have to babysit them if they weren't completely stable.
 
-<!-- more --> 
 
 # Enter xinetd  
 
-[xinetd](https://en.wikipedia.org/wiki/Xinetd) is an internet [super-server](https://en.wikipedia.org/wiki/Super-server) which was originally written in 2003ish (it predates npm by years) to replace ined and is still maintained and included in almost every Linux distribution. It's also written in plain C so it only uses 2mb of ram when running.
+[xinetd](https://en.wikipedia.org/wiki/Xinetd) is an internet [super-server](https://en.wikipedia.org/wiki/Super-server) originally written in 2003 or earlier.  It is still [actively maintained](https://github.com/openSUSE/xinetd) and included in most Linux distributions.  Unlike most of the options I considered it's written in plain C so it uses a bare minimum of resources.
 
-Xinetd works in the Unix tradition of doing one simple thing and doing it well.  It will listen on a port (in our case a TCP port) and when something connects it will start a process of your choosing and map stdin/stdout to that socket.  That's it!  Your processes doesn't have to understand sockets or.... TODO
+Xinetd works in the Unix tradition of doing one simple thing and doing it well.  It will listen on a port (in our case a TCP port) and when something connects it will start a process and map the stdin/stdout to the socket.  That's it!  Since your process only needs to read/write from standard input/output you have a lot of flexibility in what you use to handle the response. Xinetd will start a new copy of the process for each request so if it crashes the socket will be closed and the next request starts fresh.
 
-## Configure nginx
+## Configure NGINX
 
-First lets get the nginx config out of the way. 
+First lets get the NGINX config out of the way. 
 
-We don't want to open a new port on our firewall just for xinetd so we'll do a proxy_pass from our webserver to hit a port on localhost.
+We don't want to open a new port on our firewall just for xinetd so we'll do a proxy_pass from our webserver to hit a port on localhost.  This will also let NGINX handle HTTPS so the data going over the intent is encrypted.
 
 ```nginx
 location /update {
@@ -31,69 +31,88 @@ location /update {
 
 ## Configure xinetd
 
-If you don't have xinetd installed you can get it with your favorite local neighborhood package manager.  `apt-get install xinetd` if you're on Debian/Ubuntu.
+If you don't have xinetd installed you can get it with your local neighborhood package manager.  `apt-get install xinetd` if you're on Debian/Ubuntu.
 
-xinetd requires that the port you are listening on be defined in /etc/services.  I'm not sure why it needs this exactly but it complains if it's not there. ¯\_(ツ)_/¯
 
-```config
-github-hooks 61000/tcp          # github hooks
-```
 
-Then we add our service definition to /etc/xinetd.d/.  Just create a new file called `github-hooks` and add this:
+Then we add our service definition to /etc/xinetd.d/.  Create a new file called `github-hooks` and add this:
 
 ```conf
 service github-hooks
 {
+    type        = UNLISTED
     socket_type = stream
     protocol    = tcp
     port        = 61000
     wait        = no
-    user        = optimal
+    user        = user1
     server      = /home/site/bin/githook
     instances   = 2
 }
 ```
 
-The first thing to notice is that xinetd doesn't speak HTTP (I know, crazy, right?).  
+Most of the lines here are fairly self explanatory but I'll go through the interesting ones briefly. If you need more details on what options are available consult the [xinetd man page](https://linux.die.net/man/5/xinetd.conf). 
+
+* **type = unlisted**  
+  This tells xinetd that your service doesn't need to appear in /etc/services.  You could edit /etc/services and add your service and omit this line but this is simpler.
+* **user = user1**  
+  For security you don't want the xinetd services to run as root so it will execute the handler as the user you specify.  You definitely don't want to use the same user you log in as here.  Create a new user with only the permissions it needs. (You can also specify a group with group=)
+* **server = /home/site/bin/githook**  
+  This is what gets run when a connection is made from the outside.
+* **instances = 2**
+  This limits the number of concurrent instances of this service.  Since it doesn't make sense to have 2 git pull going on at once we limit this to a single instance.  Technically git's internal locking should keep the repository consistent without this but this would be more resilient to a [DOS](https://en.wikipedia.org/wiki/Denial-of-service_attack) attempt.
+
+After this file is in place you can restart xinetd `sudo service xinetd restart` on a Debian or Ubuntu machine.  According to the man page you can also send [SIGHUP](https://en.wikipedia.org/wiki/SIGHUP) to reload the configuration. Run `sudo service xinetd status` to make sure the service started without error.
+
+## Implementing The Handler
+
+Now that xinetd is running we can edit the handler and re-run our request. 
+
+The first thing to keep in mind is that xinetd doesn't speak HTTP so we have to do some parsing.  Unfortunately, most http libraries don't support reading from stdin directly. On the other hand, it's a text protocol so we should be able to pull out what we need without much fuss.
+
+### Choosing the Right Tool
+
+While I'm usually the first one to suggest a statically typed language for any project when I expect the entire script to fit on a single screen it might be overkill.  Python is already installed and should let us get this done with little ceremony.
 
 
+### Parsing HTTP
 
-# Pulling from GitHub
-https://github.blog/2015-06-16-read-only-deploy-keys/
+For our purposes HTTP is a pretty simple protocol.  We only need to handle requests from the GitHub hook so we can take a few shortcuts. 😈
 
-# Configuring xinetd
+Here is a sample of the HTTP headers I expect from GitHub.
+```http
+Connection: close
+Content-Length: 7547
+Accept: */*
+User-Agent: GitHub-Hookshot/903858c
+X-GitHub-Event: push
+X-GitHub-Delivery: b6eb5d30-4e96-11e9-9f14-dfd1cb48de87
+content-type: application/json
+X-Hub-Signature: sha1=0c27835e1218ac56a303cb02716b8f0cfbd90445
+```
 
-link: https://github.com/openSUSE/xinetd
-
-
+First we will get the HTTP headers which are line delineated.  The only one that we need to care about is the `Content-Length` header which will tell us how many bytes to read when we get to the payload.  If we wanted to be more general purpose we would check the `content-type` but since we are configuring the hook I will assume it's correct. Likewise, validating the `X-Hub-Signature` is left as an exercise to the reader.
 
 ```python
-#!/usr/bin/python
-
-import sys, fileinput, json
-
-length = 0
-payload = {}
-def isBlank(x): return not x.strip()
-with open("/home/optimal/log.txt","a") as f:
-    while True:
-        line = sys.stdin.readline()
-        if line.startswith("Content-Length:"):
-            lenstr = line.split(':')[1].strip()
-            length = int(lenstr)
-        if isBlank(line):
-            if length > 0:
-                data = sys.stdin.read(length)
-                end = data.rfind('}')+1
-                data = data[:end]
-                payload = json.loads(data)
-                f.write(json.dumps(payload))
-            break
-
-print "HTTP/1.1 200 OK\n\nkkthxbye"
-print payload['repository']['full_name']
-
+if line.startswith("Content-Length:"):
+    lenstr = line.split(':')[1].strip()
+    length = int(lenstr)
 ```
+
+If we encounter a blank line we know we're done with the headers and can read the payload and attempt to decode it as JSON.
+
+```python
+if isBlank(line):
+    data = sys.stdin.read(length)
+    payload = json.loads(data)
+```
+
+Then we just need to respond to the caller by writing an HTTP status code to stdout.  I choose to send the respond before staring the git pull so the calling process does not need to wait for acknowledgement.  I don't attempt to indicate whether the git pull succeeded or not in the HTTP response.
+```python
+print "HTTP/1.1 200 OK\n\nkkthxbye"
+```
+
+For reference here is the complete script.
 
 ```python
 #!/usr/bin/python
@@ -103,13 +122,15 @@ from os.path import expanduser
 
 REPO_FULL_NAME = "ericharding/OptimalStake"
 REPO_LOCAL_PATH = expanduser("~/www/")
+LOG_PATH = expanduser("~/gitlog.txt")
 
 length = 0
 payload = {}
 def isBlank(x): return not x.strip()
 def log(x):
-    with open("/home/optimal/gitlog.txt","a") as f:
-        f.write(x)
+    with open(LOG_PATH,"a") as f:
+        timeStamp = datetime.datetime.now().strftime("[%Y-%m-%d %H:%M] ")
+        f.write(timeStamp + x + '\n')
 
 while True:
     line = sys.stdin.readline()
@@ -135,5 +156,19 @@ if repoName == REPO_FULL_NAME:
     os.chdir(REPO_LOCAL_PATH)
     subprocess.call(["git", "pull"])
 ```
+
+## Security
+
+Any time 
+
+## Enable the Hook
+
+=======================
+
+# Pulling from GitHub
+https://github.blog/2015-06-16-read-only-deploy-keys/
+
+
+
 
 # Security
