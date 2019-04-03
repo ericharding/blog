@@ -1,6 +1,8 @@
 +++
 title="Using Xinetd with GitHub Hooks"
 date=2019-04-04
+[taxonomies]
+tags=["python","xinetd","NGINX"]
 +++
 
 Recently, I needed to set up a static site and have it automatically update when I push changes to git.

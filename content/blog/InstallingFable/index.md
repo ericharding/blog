@@ -1,7 +1,8 @@
 +++
 title="F# and Fable Installfest 2019"
 date=2019-02-21
-draft=false
+[taxonomies]
+tags=["F#", "Fable", "dotnet", "netcore"]
 +++
 
 Starting from scratch lets set up a development environment for F#.  Following this will get you completely set up for command line tools, servers and web UI development.  I will not be covering desktop or mobile development but you should know that F# also excels in those domains.
