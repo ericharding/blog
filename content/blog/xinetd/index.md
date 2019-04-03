@@ -161,9 +161,10 @@ if repoName == REPO_FULL_NAME:
 
 ## Security
 
-Any time 
+Any time you hook some code up to the internet you should spend a few minutes thinking about what could go wrong.
 
-## Enable the Hook
+And finally...
+## The GitHub Part
 
 =======================
 
