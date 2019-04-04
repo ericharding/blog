@@ -122,9 +122,9 @@ printfn "Hello world from F#"
 
 # Fable
 
-Now that we have F# working with .NET Core we can change gears and enter the web world with Fable.  Fable is high quality F# to Javascript compiler which has libraries to support programming in the [Elm](https://elmish.github.io/elmish/) or [React](https://github.com/fable-compiler/fable-react) model.  It can do a lot more than that but this is just a getting started tutorial.
+Now that we have F# working with .NET Core we can change gears and enter the web world with Fable.  Fable is high quality F# to JavaScript compiler which has libraries to support programming in the [Elm](https://elmish.github.io/elmish/) or [React](https://github.com/fable-compiler/fable-react) model.  It can do a lot more than that but this is just a getting started tutorial.
 
-In the first part we installed the DotNet SDK which includes a package manager for desktop and server development.  Since Fable targets the web using your existing DotNet libraries aren't going to be super helpful.  Instead Fable embraces the Javascript ecosystem and makes it really easy to use npm packages.
+In the first part we installed the DotNet SDK which includes a package manager for desktop and server development.  Since Fable targets the web using your existing DotNet libraries aren't going to be super helpful.  Instead Fable embraces the JavaScript ecosystem and makes it really easy to use npm packages.
 
 ## Step 1 - Install Node
 
@@ -132,7 +132,7 @@ Head over to [http://nodejs.org/](http://nodejs.org) and get the installer.  Eit
 
 ## Step 2 - Install yarn
 
-Next head over to [yarnpkg.com](http://yarnpkg.com) and click INSTALL YARN.  If you already have [Chocolatey](http://chocolatey.org) or [Scoop](http://scoop.sh) those will be the easiest options otherwise get the msi installer.
+Next head over to [yarnpkg.com](http://yarnpkg.com) and click INSTALL YARN.  If you already have [Chocolatey](http://chocolatey.org) or [Scoop](http://scoop.sh) those will be the easiest options otherwise get the MSI installer.
 
 If you prefer to use NPM over Yarn you are welcome to continue with that as it's also supported, however, for the rest of this tutorial I will assume you're using Yarn.
 
@@ -188,7 +188,7 @@ When you first start it will take a little bit to get going but once it's loaded
 
 Fable also generates source maps so the in browser development tools or [Debugger for Chrome](https://marketplace.visualstudio.com/items?itemName=msjsdiag.debugger-for-chrome) will let you set breakpoints and step through your F# code.
 
-To package your project for deployment stop the development servers with ctrl-c and just run `fake build`.  This will generate a pure javascript bundle in src\client\deploy\.
+To package your project for deployment stop the development servers with ctrl-c and just run `fake build`.  This will generate a pure JavaScript bundle in src\client\deploy\.
 
 If you add the `--deploy` flag when you create a new SAFE project there are several more options to help with deployment.
 ```
@@ -205,6 +205,6 @@ These options create new targets in the fake script (build.fsx) so you can, for 
 
 # Finis
 
-Getting F# and Fable installed can be a challenge. It depends on both the javascript and dotnet ecosystem and neither of those is known for standing still.  There have been a lot of changes in .NET Core and Fable over the last few years and it's easy to stumble across outdated documentation which can be frustrating.  I hope this guide helps you get past that initial hurdle so you can take F# for a spin.  I think you'll find it has a *lot* to offer.
+Getting F# and Fable installed can be a challenge. It depends on both the JavaScript and dotnet ecosystem and neither of those is known for standing still.  There have been a lot of changes in .NET Core and Fable over the last few years and it's easy to stumble across outdated documentation which can be frustrating.  I hope this guide helps you get past that initial hurdle so you can take F# for a spin.  I think you'll find it has a *lot* to offer.
 
 If you want to learn more check out the learning resources on [fsharp.org](https://fsharp.org/learn.html), [FsharpForFunAndProfit.com](https://fsharpforfunandprofit.com/) and [Fable.io](https://fable.io/docs/getting_started.html).  I also highly recommend going through the [SAFE-Dojo](https://github.com/CompositionalIT/SAFE-Dojo) which gives an example of how powerful using F# on the front and back end of your application can be.

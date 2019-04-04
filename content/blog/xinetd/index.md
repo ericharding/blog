@@ -74,7 +74,7 @@ The first thing to keep in mind is that xinetd doesn't speak HTTP so we have to 
 
 ### Choosing the Right Tool
 
-While I'm usually the first one to suggest a statically typed language for any project when I expect the entire script to fit on a single screen it might be overkill.  Python is already installed and should let us get this done with little ceremony.
+While I'm usually the first one to suggest a statically typed language for *any* project when I expect the entire script to fit on a single screen it might be overkill.  Python is already installed and should let us get this done with little ceremony.
 
 
 ### Parsing HTTP
@@ -162,8 +162,26 @@ if repoName == REPO_FULL_NAME:
 ## Security
 
 Any time you hook some code up to the internet you should spend a few minutes thinking about what could go wrong.
+### Malformed Messages
+* **The message might not be valid HTTP**  
+    The NGINX proxy_pass will only forward valid http messages. If the message wasn't valid the webserver wouldn't know where to route the request.
+* **The message might not have a Content-Length**  
+    When we reach a blank line we will not try to parse the JSON.  Then we return 200 OK and promptly crash.  Since this process was only supposed to live for the duration of the request this is A-OK.  Since xinetd is limited to a single instance it would be reasonably difficult to exhaust the server's resources this way.
+* **The payload is not JSON**  
+    The script will crash as intended. 👍
+
+### Well Formed but Fake messages
+
+* **We get a message that isn't from GitHub but looks like it is**  
+    We will issue a pull request which will finish quickly since there are no changes.  The script will not be run again until the pull finishes so only one will be in flight at a time but it could effectively be running `git pull` in a loop. This could definitely get us censured by GitHub eventually.  
+
+    We can mitigate this in 2 ways.
+    - We can validate the `X-Hub-Signature`  If we do it becomes impossible to fake the message so we will never issue spurious pull requests.
+    - We can use xinetd [`cps`](https://linux.die.net/man/5/xinetd.conf) to limit the number of requests per second and set up some back pressure.  This isn't a bad idea but I don't think it can go below 1rps so it probably won't work.
+
 
 And finally...
+
 ## The GitHub Part
 
 =======================
