@@ -159,7 +159,7 @@ if repoName == REPO_FULL_NAME:
     subprocess.call(["git", "pull"])
 ```
 
-## Security
+# Security
 
 Any time you hook some code up to the internet you should spend a few minutes thinking about what could go wrong.
 ### Malformed Messages
@@ -175,21 +175,21 @@ Any time you hook some code up to the internet you should spend a few minutes th
 * **We get a message that isn't from GitHub but looks like it is**  
     We will issue a pull request which will finish quickly since there are no changes.  The script will not be run again until the pull finishes so only one will be in flight at a time but it could effectively be running `git pull` in a loop. This could definitely get us censured by GitHub eventually.  
 
-    We can mitigate this in 2 ways.
-    - We can validate the `X-Hub-Signature`  If we do it becomes impossible to fake the message so we will never issue spurious pull requests.
-    - We can use xinetd [`cps`](https://linux.die.net/man/5/xinetd.conf) to limit the number of requests per second and set up some back pressure.  This isn't a bad idea but I don't think it can go below 1rps so it probably won't work.
+    The fix for this is to check the `X-Hub-Signature` and verify that the message payload is signed by GitHub.  This is actually pretty easy and there is some sample code for how to accomplish this [here](https://github.com/carlos-jenkins/python-github-webhooks/blob/master/webhooks.py#L76).
 
+    For defense in depth we could also configure the xinetd [`cps`](https://linux.die.net/man/5/xinetd.conf) option which will set a maximum number of requests per second and a backoff time if it is exceeded.  I don't think this can go below 1 so this isn't something you should rely on as your only method of defense.
 
 And finally...
 
-## The GitHub Part
+# The GitHub Part
 
-=======================
+Setting up the WebHook on GitHub is very easy. There are 2 steps:
 
-# Pulling from GitHub
-https://github.blog/2015-06-16-read-only-deploy-keys/
+## Set up a Read-only Deploy Key
+First you will need to set up a [deploy key](https://github.blog/2015-06-16-read-only-deploy-keys/).  This key will only be used on the production machine and it will give it read only access to the repository.  If you ever suspect the machine has been compromised you can simply revoke the key from the GitHub UI.
 
+GitHub has great documentation for setting up a Deploy key so I won't repeat it here.  You can read it at [https://developer.github.com/v3/guides/managing-deploy-keys/#deploy-keys](https://developer.github.com/v3/guides/managing-deploy-keys/#deploy-keys).
 
+## Configure the WebHook
 
-
-# Security
+![Adding a Web Hook](webhook.png)
