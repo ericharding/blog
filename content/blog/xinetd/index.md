@@ -1,8 +1,8 @@
 +++
 title="Using Xinetd with GitHub Hooks"
-date=2019-04-04
+date=2019-04-05
 [taxonomies]
-tags=["python","xinetd","NGINX"]
+tags=["python","xinetd","NGINX","GitHub"]
 +++
 
 Recently, I needed to set up a static site and have it automatically update when I push changes to git.
@@ -177,7 +177,7 @@ Any time you hook some code up to the internet you should spend a few minutes th
 
     The fix for this is to check the `X-Hub-Signature` and verify that the message payload is signed by GitHub.  This is actually pretty easy and there is some sample code for how to accomplish this [here](https://github.com/carlos-jenkins/python-github-webhooks/blob/master/webhooks.py#L76).
 
-    For defense in depth we could also configure the xinetd [`cps`](https://linux.die.net/man/5/xinetd.conf) option which will set a maximum number of requests per second and a backoff time if it is exceeded.  I don't think this can go below 1 so this isn't something you should rely on as your only method of defense.
+    For defense in depth we could also configure the xinetd [`cps`](https://linux.die.net/man/5/xinetd.conf) option which will set a maximum number of requests per second and a backoff time if it is exceeded.  I don't think this can go below 1 so this isn't something you should rely on as your only method of defense.gg
 
 And finally...
 
@@ -188,8 +188,20 @@ Setting up the WebHook on GitHub is very easy. There are 2 steps:
 ## Set up a Read-only Deploy Key
 First you will need to set up a [deploy key](https://github.blog/2015-06-16-read-only-deploy-keys/).  This key will only be used on the production machine and it will give it read only access to the repository.  If you ever suspect the machine has been compromised you can simply revoke the key from the GitHub UI.
 
-GitHub has great documentation for setting up a Deploy key so I won't repeat it here.  You can read it at [https://developer.github.com/v3/guides/managing-deploy-keys/#deploy-keys](https://developer.github.com/v3/guides/managing-deploy-keys/#deploy-keys).
+GitHub has great documentation for setting up a Deploy key so I won't repeat it here.  You can read it at [https://developer.github.com/v3/guides/managing-deploy-keys/#deploy-keys](https://developer.github.com/v3/guides/managing-deploy-keys/#deploy-keys).  It's just like adding an SSH key to your profile but you do it in the repository settings.
 
 ## Configure the WebHook
 
+Now add the webhook with your chosen URL.  Set the content type to application/json instead of form encoding or the script above won't be able to decode it.  The 'Secret' is used to generate the `X-Hub-Signature` so you'll need it if you want to validate the signature.  For this use case we only need the push event but you can use xinetd/python to add webhooks for other sorts of events.
+
 ![Adding a Web Hook](webhook.png)
+
+Once you activate the hook you can see a list of recent deliveries.  Expand one to see the headers and payload of the delivery.  If the request was successful you can also see the response details.  If the request is unsuccessful use the `log` function and the Redeliver button to gather more information.
+
+If everything works as intended you should see something like this.
+
+![Success](delivery.png)
+
+# That's it!
+Now you can test your hook by pushing a change.  GitHub should call your web hook which will invoke the script and pull the latest change using your deploy key.  Easy to set up and uses minimal resources.  One instance of xinetd can be configured to handle any number of different repositories.
+
