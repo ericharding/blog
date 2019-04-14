@@ -1,0 +1,618 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Publish React Components with F#</title>
+    <meta name="description" content="Southern Fried F# Talk - Publish React Components with Fable">
+    <meta name="author" content="Eric Harding">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <script src="//code.jquery.com/jquery-1.8.0.js"></script>
+    <script src="//code.jquery.com/ui/1.8.23/jquery-ui.js"></script>
+    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/css/bootstrap-combined.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/night.css" id="theme">
+    <link type="text/css" rel="stylesheet" href="fsharp.formatting/styles/style.css" />
+    <link type="text/css" rel="stylesheet" href="fsharp.formatting/styles/deedle.css" />
+    <link type="text/css" rel="stylesheet" href="css/custom.css" />
+    <script src="fsharp.formatting/styles/tips.js" type="text/javascript"></script>
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+    <link rel="stylesheet" href="css/fsreveal.css">
+    <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+    <script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+    </script>
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+    <script language="javascript" type="text/javascript">
+        function init()
+        {
+            websocket = new WebSocket("ws://"+window.location.host+"/websocket");
+            websocket.onmessage = function(evt) { location.reload(); };
+        }
+        window.addEventListener("load", init, false);
+    </script>
+</head>
+<body>
+    <div class="reveal">
+        <div class="tip" id="fs1">type Props =<br />&#160;&#160;{name: string;}<br /><br />Full name: index.Props</div>
+<div class="tip" id="fs2">Props.name: string</div>
+<div class="tip" id="fs3">Multiple items<br />val string : value:&#39;T -&gt; string<br /><br />Full name: Microsoft.FSharp.Core.Operators.string<br /><br />--------------------<br />type string = System.String<br /><br />Full name: Microsoft.FSharp.Core.string</div>
+<div class="tip" id="fs4">Multiple items<br />type FSComponent =<br />&#160;&#160;inherit obj<br />&#160;&#160;new : props:Props -&gt; FSComponent<br />&#160;&#160;override render : unit -&gt; &#39;a<br /><br />Full name: index.FSComponent<br /><br />--------------------<br />new : props:Props -&gt; FSComponent</div>
+<div class="tip" id="fs5">val props : Props</div>
+<div class="tip" id="fs6">val self : FSComponent</div>
+<div class="tip" id="fs7">type unit = Unit<br /><br />Full name: Microsoft.FSharp.Core.unit</div>
+<div class="tip" id="fs8">override FSComponent.render : unit -&gt; &#39;a<br /><br />Full name: index.FSComponent.render</div>
+<div class="tip" id="fs9">val sprintf : format:Printf.StringFormat&lt;&#39;T&gt; -&gt; &#39;T<br /><br />Full name: Microsoft.FSharp.Core.ExtraTopLevelOperators.sprintf</div>
+<div class="tip" id="fs10">type Model =<br />&#160;&#160;{image: string;<br />&#160;&#160;&#160;angle: float;}<br /><br />Full name: index.Model</div>
+<div class="tip" id="fs11">Model.image: string</div>
+<div class="tip" id="fs12">Model.angle: float</div>
+<div class="tip" id="fs13">Multiple items<br />val float : value:&#39;T -&gt; float (requires member op_Explicit)<br /><br />Full name: Microsoft.FSharp.Core.Operators.float<br /><br />--------------------<br />type float = System.Double<br /><br />Full name: Microsoft.FSharp.Core.float<br /><br />--------------------<br />type float&lt;&#39;Measure&gt; = float<br /><br />Full name: Microsoft.FSharp.Core.float&lt;_&gt;</div>
+<div class="tip" id="fs14">type Msg =<br />&#160;&#160;| Left of float<br />&#160;&#160;| Right of float<br />&#160;&#160;| Reset<br /><br />Full name: index.Msg</div>
+<div class="tip" id="fs15">union case Msg.Left: float -&gt; Msg</div>
+<div class="tip" id="fs16">union case Msg.Right: float -&gt; Msg</div>
+<div class="tip" id="fs17">union case Msg.Reset: Msg</div>
+<div class="tip" id="fs18">val init : img:string option -&gt; Model<br /><br />Full name: index.init</div>
+<div class="tip" id="fs19">val img : string option</div>
+<div class="tip" id="fs20">val img : string</div>
+<div class="tip" id="fs21">val defaultArg : arg:&#39;T option -&gt; defaultValue:&#39;T -&gt; &#39;T<br /><br />Full name: Microsoft.FSharp.Core.Operators.defaultArg</div>
+<div class="tip" id="fs22">val update : msg:Msg -&gt; model:Model -&gt; Model<br /><br />Full name: index.update</div>
+<div class="tip" id="fs23">val msg : Msg</div>
+<div class="tip" id="fs24">val model : Model</div>
+<div class="tip" id="fs25">val a : float</div>
+<div class="tip" id="fs26">val view : model:Model -&gt; dispatch:&#39;a -&gt; &#39;b<br /><br />Full name: index.view</div>
+<div class="tip" id="fs27">val dispatch : &#39;a</div>
+<div class="tip" id="fs28">type &#39;T option = Option&lt;&#39;T&gt;<br /><br />Full name: Microsoft.FSharp.Core.option&lt;_&gt;</div>
+<div class="tip" id="fs29">val ImgSpinner : props:&#39;a -&gt; &#39;b<br /><br />Full name: index.ImgSpinner</div>
+<div class="tip" id="fs30">val props : &#39;a</div>
+
+        <!-- Any section element inside of this container is displayed as a slide -->
+        <div class="slides">
+            <section >
+<!-- theme: sky -->
+<h2>Publish React Components with Fable</h2>
+<blockquote>
+<p>Eric Harding<br />
+@digitalsorcery<br />
+<a href="https://blog.digitalsorcery.net">https://blog.digitalsorcery.net</a></p>
+</blockquote>
+<p><img src="images/BTS.svg" alt="BTS" />
+<img src="images/sfflogo.png" alt="SFF" /></p>
+<!-- 
+BTS is a local company building tools for futures and options traders
+use fable in production
+SFF is a local meetup, come join us.
+-->
+</section>
+<section >
+<section >
+<h2>First,</h2>
+<h3>a little background...</h3>
+<!-- 
+I'm going to be talking about several technologies
+and I want to make sure everyone has, at least, a passing familiarity
+ -->
+</section>
+<section >
+<h2>What is React?</h2>
+<ul>
+<li>Component based JavaScript view library</li>
+<li>Pioneer of the pure view function</li>
+</ul>
+<!-- very popular -->
+</section>
+<section >
+<h2>What is F#?</h2>
+<!--
+We're about 7 talks into an F# conference...
+I hope we're all on the same page about this by now
+-->
+</section>
+<section >
+<h2>What is Babel?</h2>
+<ul>
+<li>Babel is a JavaScript to JavaScript compiler (Wait, what?)</li>
+<li>Lets you use new JavaScript syntax on older browsers</li>
+</ul>
+<p><img src="images/compiling.png" alt="Compiling" /></p>
+<!--
+Fable transforms the F# AST to the Babel AST
+-->
+</section>
+<section >
+<h2>What is Fable?</h2>
+<ul>
+<li>Fable is an F# to JavaScript compiler powered by <a href="https://babeljs.io/">Babel</a></li>
+<li>Fable is not <strong>.NET</strong> in the browser (see <a href="https://github.com/fsbolero/Bolero">Bolero</a>)</li>
+<li>Fable leverages the <strong>JavaScript</strong> ecosystem</li>
+</ul>
+<!-- 
+Anything you can do with JavaScript you can do with F#
+18 billion vs 11 billion
+-->
+</section>
+<section >
+<blockquote>
+<p><strong>Atwood's Law</strong>:<br />
+any application that can be written in JavaScript, will eventually be written in JavaScript.</p>
+</blockquote>
+</section>
+<section >
+<h2>What is Elmish?</h2>
+<ul>
+<li>Brings the MVU / <a href="https://elm-lang.org/">Elm</a> programming model to F#</li>
+<li>
+The recommended <em>(but not only)</em> way to build UI with Fable
+<ul>
+<li>Specifically: <strong>Fable.Elmish.React</strong></li>
+</ul>
+</li>
+<li>The <strong>E</strong> in <a href="https://safe-stack.github.io/">S.A.F.E</a> stack</li>
+<li>Also used in <a href="https://fsprojects.github.io/Fabulous/">Fabulous</a></li>
+</ul>
+<!--
+Why is it recommended? Because it's awesome.
+-->
+</section>
+<section >
+<h2>What is NPM?</h2>
+<ul>
+<li>The package manager for JavaScript</li>
+<li><a href="http://npmjs.com">npmjs.com</a> is the repository</li>
+<li><strong>Yarn</strong> is an alternative front end</li>
+</ul>
+</section>
+</section>
+<section >
+<section >
+<h2>OK, now what?</h2>
+</section>
+<section >
+<p>Oh, yea</p>
+</section>
+<section >
+<p>Lets</p>
+<h2>Publish React Components with Fable</h2>
+<ul>
+<li>Create a React component</li>
+<li>Test it (hopefully?)</li>
+<li>Publish it on NPM</li>
+</ul>
+<!-- 
+Fable is general purpose
+Anything you can do with JavaScript you can also do with F#
+-->
+</section>
+</section>
+<section >
+<section >
+<h1>But Why?</h1>
+<ul>
+<li>Is this a good idea?</li>
+</ul>
+<!-- 
+I may be biased...
+I think there are several reasons you might want to do this
+-->
+</section>
+<section >
+<h2>Full Participation</h2>
+<ul>
+<li>Fable 1.0 was released in <a href="https://fable.io/blog/Introducing-1-0-beta.html">2017</a></li>
+<li>Fable leverages JavaScript ecosystem to great effect</li>
+<li>Mostly a "read only" member of the larger JavaScript community</li>
+</ul>
+<!-- 
+Fable is only a few years old
+In those years the Fable community has built on top of high quality JavaScript packages like Babel and React
+Fable packages are mostly for consumption by Fable but they don't have to be
+ -->
+</section>
+<section >
+<h2>Try Before you Buy</h2>
+<ul>
+<li>Elmish is amazing for green field work</li>
+<li>We don't always have that luxury</li>
+</ul>
+<!--
+I wouldn't choose anything else for a green field web project
+-->
+</section>
+<section >
+<h2>Low Risk</h2>
+<ul>
+<li>Write a single component in F#</li>
+<li>Team doesn't even need Fable</li>
+</ul>
+<blockquote>
+<p>The secret to building large apps is never to build large apps. - <em>Justin Meyer</em></p>
+</blockquote>
+<!--
+Easy to justify
+-->
+</section>
+<section >
+<h2>Spread F#</h2>
+<ol>
+<li>Publish something useful.</li>
+<li>Wait for users to look at the source.</li>
+<li>Some will learn enough to contribute back.</li>
+</ol>
+<!-- 
+low key
+JavaScript community may be more open to functional programming ideas than .NET
+-->
+</section>
+</section>
+<section >
+<section >
+<h1>But How?</h1>
+</section>
+<section >
+<h3>I'm glad you asked.</h3>
+</section>
+<section >
+<h2>React in F#</h2>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">open</span> <span class="i">Fable</span><span class="o">.</span><span class="i">React</span>
+
+<span class="k">type</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="t">Props</span> <span class="o">=</span> { <span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="i">name</span> <span class="o">:</span> <span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="t">string</span> }
+
+<span class="k">type</span> <span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="t">FSComponent</span>(<span onmouseout="hideTip(event, 'fs5', 5)" onmouseover="showTip(event, 'fs5', 5)" class="i">props</span> <span class="o">:</span> <span onmouseout="hideTip(event, 'fs1', 6)" onmouseover="showTip(event, 'fs1', 6)" class="t">Props</span>) <span class="k">as</span> <span onmouseout="hideTip(event, 'fs6', 7)" onmouseover="showTip(event, 'fs6', 7)" class="v">self</span> <span class="o">=</span>
+    <span class="k">inherit</span> <span class="i">PureComponent</span><span class="o">&lt;</span><span onmouseout="hideTip(event, 'fs1', 8)" onmouseover="showTip(event, 'fs1', 8)" class="i">Props</span>,<span onmouseout="hideTip(event, 'fs7', 9)" onmouseover="showTip(event, 'fs7', 9)" class="i">unit</span><span class="o">&gt;</span>(<span class="i">props</span>) <span class="k">with</span>
+    <span class="k">do</span> <span class="i">self</span><span class="o">.</span><span class="i">setInitState</span>()
+    <span class="k">override</span> <span class="i">__</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs8', 10)" onmouseover="showTip(event, 'fs8', 10)" class="f">render</span>() <span class="o">=</span>
+        <span class="i">div</span> [] [
+          <span class="i">str</span> (<span onmouseout="hideTip(event, 'fs9', 11)" onmouseover="showTip(event, 'fs9', 11)" class="i">sprintf</span> <span class="s">&quot;Hello %s&quot;</span> <span class="i">props</span><span class="o">.</span><span class="i">name</span>)]
+</code></pre></td>
+</tr>
+</table>
+<ul>
+<li>Props &amp; State</li>
+<li>Component / PureComponent</li>
+<li>render()</li>
+<li>HTML DSL 👌</li>
+</ul>
+<!-- 
+- That's basically it
+- Different namespaces in fable 2.x
+- package.json
+- webpack.config.js
+-->
+</section>
+<section >
+<h2>App.js</h2>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="js">import React, { Component } from <span class="s">'react'</span>;
+import { FSComponent } from <span class="s">'fs-react-sample-component'</span>
+<span class="k">class</span> App extends Component {
+  render() {
+    <span class="k">return</span> (
+      &lt;div className=<span class="s">"App"</span><span class="o">&gt;</span>
+        &lt;FSComponent name=<span class="s">"from F#"</span> <span class="o">/</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span>/div&gt;);
+  }
+}
+</code></pre></td></tr></table>
+</section>
+<section >
+<h3>Publish to NPM</h3>
+<ul>
+<li>yarn build</li>
+<li>
+yarn publish<br />
+<span style="color:orange">- or -</span>
+</li>
+<li>npm run build</li>
+<li>npm publish</li>
+</ul>
+</section>
+<section >
+<h3>Consume from NPM</h3>
+<blockquote>
+<p>yarn add fs-react-sample-component<br />
+<span style="color:orange">- or -</span><br />
+npm install --save fs-react-sample-component</p>
+</blockquote>
+<ul>
+<li>Peer dependency on React</li>
+</ul>
+<!-- If you're already using react. You're done -->
+</section>
+<section >
+<h3>For Development</h3>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+<span class="l">5: </span>
+<span class="l">6: </span>
+<span class="l">7: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip"><code lang="bash">cd fs-react-sample-component
+npm link
+yarn start
+
+cd js-test
+npm link fs-react-sample-component
+yarn start
+</code></pre></td></tr></table>
+<ul>
+<li>Automatic reload across both projects</li>
+</ul>
+<!-- 
+npm link sets up the local connection 
+-->
+</section>
+<section >
+<h3>How Much Overhead?</h3>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
+<span class="l">11: </span>
+<span class="l">12: </span>
+<span class="l">13: </span>
+<span class="l">14: </span>
+<span class="l">15: </span>
+<span class="l">16: </span>
+<span class="l">17: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="js">Asset      Size  Chunks             Chunk Names
+index.js  <span class="n">16.9</span> KiB       <span class="n">0</span>  [emitted]  main
+Entrypoint main <span class="o">=</span> index.js
+[<span class="n">0</span>] external <span class="s">"react"</span> <span class="n">42</span> bytes {<span class="n">0</span>} [built]
+[<span class="n">11</span>] sample/src/fs-react-sample-component.fsproj <span class="o">+</span> <span class="n">9</span> modules <span class="n">106</span> KiB {<span class="n">0</span>} [built]
+    <span class="o">|</span> sample/src/sample.fsproj <span class="n">27</span> bytes [built]
+    <span class="o">|</span> sample/src/index.fs <span class="n">1.51</span> KiB [built]
+    <span class="o">|</span> sample/.fable/fable-library.<span class="n">2.2</span>.<span class="n">3</span>/Types.js <span class="n">7.62</span> KiB [built]
+    <span class="o">|</span> sample/.fable/fable-library.<span class="n">2.2</span>.<span class="n">3</span>/Reflection.js <span class="n">7.14</span> KiB [built]
+    <span class="o">|</span> sample/.fable/fable-library.<span class="n">2.2</span>.<span class="n">3</span>/String.js <span class="n">16</span> KiB [built]
+    <span class="o">|</span> sample/.fable/fable-library.<span class="n">2.2</span>.<span class="n">3</span>/Util.js <span class="n">17</span> KiB [built]
+    <span class="o">|</span> sample/.fable/fable-library.<span class="n">2.2</span>.<span class="n">3</span>/Long.js <span class="n">34.6</span> KiB [built]
+    <span class="o">|</span> sample/.fable/fable-library.<span class="n">2.2</span>.<span class="n">3</span>/Date.js <span class="n">14.3</span> KiB [built]
+    <span class="o">|</span> sample/.fable/fable-library.<span class="n">2.2</span>.<span class="n">3</span>/RegExp.js <span class="n">3.56</span> KiB [built]
+    <span class="o">|</span> sample/.fable/fable-library.<span class="n">2.2</span>.<span class="n">3</span>/Int<span class="n">32</span>.js <span class="n">4.04</span> KiB [built]
+    <span class="o">+</span> <span class="n">10</span> hidden modules
+Done <span class="k">in</span> <span class="n">14.64</span>s.
+</code></pre></td></tr></table>
+<h3>17 KiB <em>before</em> gzip</h3>
+<!--
+Webpack gives a nice breakdown of what you use
+-->
+</section>
+</section>
+<section >
+<section >
+<h2>What About Elmish?</h2>
+</section>
+<section >
+<h3>A Simple Elmish App</h3>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+<span class="l">5: </span>
+<span class="l">6: </span>
+<span class="l">7: </span>
+<span class="l">8: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">type</span> <span onmouseout="hideTip(event, 'fs10', 12)" onmouseover="showTip(event, 'fs10', 12)" class="t">Model</span> <span class="o">=</span> {
+  <span onmouseout="hideTip(event, 'fs11', 13)" onmouseover="showTip(event, 'fs11', 13)" class="i">image</span> <span class="o">:</span> <span onmouseout="hideTip(event, 'fs3', 14)" onmouseover="showTip(event, 'fs3', 14)" class="t">string</span>
+  <span onmouseout="hideTip(event, 'fs12', 15)" onmouseover="showTip(event, 'fs12', 15)" class="i">angle</span> <span class="o">:</span> <span onmouseout="hideTip(event, 'fs13', 16)" onmouseover="showTip(event, 'fs13', 16)" class="t">float</span>
+}
+<span class="k">type</span> <span onmouseout="hideTip(event, 'fs14', 17)" onmouseover="showTip(event, 'fs14', 17)" class="t">Msg</span> <span class="o">=</span>
+  | <span onmouseout="hideTip(event, 'fs15', 18)" onmouseover="showTip(event, 'fs15', 18)" class="p">Left</span> <span class="k">of</span> <span onmouseout="hideTip(event, 'fs13', 19)" onmouseover="showTip(event, 'fs13', 19)" class="t">float</span>
+  | <span onmouseout="hideTip(event, 'fs16', 20)" onmouseover="showTip(event, 'fs16', 20)" class="p">Right</span> <span class="k">of</span> <span onmouseout="hideTip(event, 'fs13', 21)" onmouseover="showTip(event, 'fs13', 21)" class="t">float</span>
+  | <span onmouseout="hideTip(event, 'fs17', 22)" onmouseover="showTip(event, 'fs17', 22)" class="p">Reset</span>
+</code></pre></td>
+</tr>
+</table>
+<p>...</p>
+</section>
+<section >
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
+<span class="l">11: </span>
+<span class="l">12: </span>
+<span class="l">13: </span>
+<span class="l">14: </span>
+<span class="l">15: </span>
+<span class="l">16: </span>
+<span class="l">17: </span>
+<span class="l">18: </span>
+<span class="l">19: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">let</span> <span onmouseout="hideTip(event, 'fs18', 23)" onmouseover="showTip(event, 'fs18', 23)" class="f">init</span> <span onmouseout="hideTip(event, 'fs19', 24)" onmouseover="showTip(event, 'fs19', 24)" class="i">img</span> <span class="o">=</span>
+  <span class="k">let</span> <span onmouseout="hideTip(event, 'fs20', 25)" onmouseover="showTip(event, 'fs20', 25)" class="i">img</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs21', 26)" onmouseover="showTip(event, 'fs21', 26)" class="f">defaultArg</span> <span onmouseout="hideTip(event, 'fs20', 27)" onmouseover="showTip(event, 'fs20', 27)" class="i">img</span> <span class="s">&quot;https://southernfriedfsharp.com/sfflogo_large2.png&quot;</span>
+  { <span class="i">image</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs20', 28)" onmouseover="showTip(event, 'fs20', 28)" class="i">img</span>; <span class="i">angle</span> <span class="o">=</span> <span class="n">0.0</span> }
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs22', 29)" onmouseover="showTip(event, 'fs22', 29)" class="f">update</span> <span onmouseout="hideTip(event, 'fs23', 30)" onmouseover="showTip(event, 'fs23', 30)" class="i">msg</span> <span onmouseout="hideTip(event, 'fs24', 31)" onmouseover="showTip(event, 'fs24', 31)" class="i">model</span> <span class="o">=</span>
+  <span class="k">match</span> <span onmouseout="hideTip(event, 'fs23', 32)" onmouseover="showTip(event, 'fs23', 32)" class="i">msg</span> <span class="k">with</span>
+  | <span onmouseout="hideTip(event, 'fs15', 33)" onmouseover="showTip(event, 'fs15', 33)" class="p">Left</span> <span onmouseout="hideTip(event, 'fs25', 34)" onmouseover="showTip(event, 'fs25', 34)" class="i">a</span> <span class="k">-&gt;</span> { <span onmouseout="hideTip(event, 'fs24', 35)" onmouseover="showTip(event, 'fs24', 35)" class="i">model</span> <span class="k">with</span> <span class="i">angle</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs24', 36)" onmouseover="showTip(event, 'fs24', 36)" class="i">model</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs12', 37)" onmouseover="showTip(event, 'fs12', 37)" class="i">angle</span> <span class="o">-</span> <span onmouseout="hideTip(event, 'fs25', 38)" onmouseover="showTip(event, 'fs25', 38)" class="i">a</span> }
+  | <span onmouseout="hideTip(event, 'fs16', 39)" onmouseover="showTip(event, 'fs16', 39)" class="p">Right</span> <span onmouseout="hideTip(event, 'fs25', 40)" onmouseover="showTip(event, 'fs25', 40)" class="i">a</span> <span class="k">-&gt;</span> { <span onmouseout="hideTip(event, 'fs24', 41)" onmouseover="showTip(event, 'fs24', 41)" class="i">model</span> <span class="k">with</span> <span class="i">angle</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs24', 42)" onmouseover="showTip(event, 'fs24', 42)" class="i">model</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs12', 43)" onmouseover="showTip(event, 'fs12', 43)" class="i">angle</span> <span class="o">+</span> <span onmouseout="hideTip(event, 'fs25', 44)" onmouseover="showTip(event, 'fs25', 44)" class="i">a</span> }
+  | <span onmouseout="hideTip(event, 'fs17', 45)" onmouseover="showTip(event, 'fs17', 45)" class="p">Reset</span> <span class="k">-&gt;</span> { <span onmouseout="hideTip(event, 'fs24', 46)" onmouseover="showTip(event, 'fs24', 46)" class="i">model</span> <span class="k">with</span> <span class="i">angle</span> <span class="o">=</span> <span class="n">0.0</span> }
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs26', 47)" onmouseover="showTip(event, 'fs26', 47)" class="f">view</span> (<span onmouseout="hideTip(event, 'fs24', 48)" onmouseover="showTip(event, 'fs24', 48)" class="i">model</span><span class="o">:</span><span onmouseout="hideTip(event, 'fs10', 49)" onmouseover="showTip(event, 'fs10', 49)" class="t">Model</span>) <span onmouseout="hideTip(event, 'fs27', 50)" onmouseover="showTip(event, 'fs27', 50)" class="i">dispatch</span> <span class="o">=</span>
+  <span class="i">div</span>[] [
+    <span class="i">img</span> [
+      <span class="i">Src</span> <span onmouseout="hideTip(event, 'fs24', 51)" onmouseover="showTip(event, 'fs24', 51)" class="i">model</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs11', 52)" onmouseover="showTip(event, 'fs11', 52)" class="i">image</span>
+      <span class="i">Style</span> [ 
+        <span class="i">Width</span> <span class="n">200</span>
+        <span class="i">Height</span> <span class="n">200</span>
+        <span class="i">Transform</span> (<span onmouseout="hideTip(event, 'fs9', 53)" onmouseover="showTip(event, 'fs9', 53)" class="i">sprintf</span> <span class="s">&quot;rotate(%fdeg)&quot;</span> <span onmouseout="hideTip(event, 'fs24', 54)" onmouseover="showTip(event, 'fs24', 54)" class="i">model</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs12', 55)" onmouseover="showTip(event, 'fs12', 55)" class="i">angle</span>) ] ]
+  ]
+</code></pre></td>
+</tr>
+</table>
+</section>
+<section >
+<h3>An Adapter</h3>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l">1: </span>
+<span class="l">2: </span>
+<span class="l">3: </span>
+<span class="l">4: </span>
+<span class="l">5: </span>
+<span class="l">6: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">open</span> <span class="i">Fable</span><span class="o">.</span><span class="i">React</span>
+
+<span class="k">type</span> <span onmouseout="hideTip(event, 'fs1', 56)" onmouseover="showTip(event, 'fs1', 56)" class="i">Props</span> <span class="o">=</span> { <span class="i">src</span> <span class="o">:</span> <span onmouseout="hideTip(event, 'fs3', 57)" onmouseover="showTip(event, 'fs3', 57)" class="i">string</span> <span onmouseout="hideTip(event, 'fs28', 58)" onmouseover="showTip(event, 'fs28', 58)" class="i">option</span> }
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs29', 59)" onmouseover="showTip(event, 'fs29', 59)" class="f">ImgSpinner</span> <span onmouseout="hideTip(event, 'fs30', 60)" onmouseover="showTip(event, 'fs30', 60)" class="i">props</span> <span class="o">=</span> 
+    <span class="i">Adapter</span><span class="o">.</span><span class="i">toComponent</span> 
+        (<span class="k">fun</span> <span class="i">p</span> <span class="k">-&gt;</span> <span class="i">Counter</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs18', 61)" onmouseover="showTip(event, 'fs18', 61)" class="i">init</span> <span class="i">p</span><span class="o">.</span><span class="i">src</span>) <span class="i">Counter</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs22', 62)" onmouseover="showTip(event, 'fs22', 62)" class="i">update</span> <span class="i">Counter</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs26', 63)" onmouseover="showTip(event, 'fs26', 63)" class="i">view</span> <span onmouseout="hideTip(event, 'fs30', 64)" onmouseover="showTip(event, 'fs30', 64)" class="i">props</span>
+</code></pre></td>
+</tr>
+</table>
+<ul>
+<li>React and MVU 🤗</li>
+</ul>
+<!--
+Props is typically a set of fields
+ -->
+</section>
+<section >
+<h3>Adapter.fs</h3>
+<table class="pre"><tr><td class="lines"><pre class="fssnip"><span class="l"> 1: </span>
+<span class="l"> 2: </span>
+<span class="l"> 3: </span>
+<span class="l"> 4: </span>
+<span class="l"> 5: </span>
+<span class="l"> 6: </span>
+<span class="l"> 7: </span>
+<span class="l"> 8: </span>
+<span class="l"> 9: </span>
+<span class="l">10: </span>
+<span class="l">11: </span>
+<span class="l">12: </span>
+<span class="l">13: </span>
+<span class="l">14: </span>
+<span class="l">15: </span>
+</pre></td>
+<td class="snippet"><pre class="fssnip highlighted"><code lang="fsharp"><span class="k">module</span> <span class="i">Adapter</span>
+<span class="k">open</span> <span class="i">Fable</span><span class="o">.</span><span class="i">React</span>
+
+<span class="k">type</span> <span class="i">GenericComponent</span><span class="o">&lt;</span><span class="o">&#39;</span><span class="i">p</span>,<span class="o">&#39;</span><span class="i">s</span>,<span class="o">&#39;</span><span class="i">m</span><span class="o">&gt;</span>(
+    <span onmouseout="hideTip(event, 'fs18', 65)" onmouseover="showTip(event, 'fs18', 65)" class="i">init</span><span class="o">:</span><span class="o">&#39;</span><span class="i">p</span><span class="k">-&gt;</span><span class="o">&#39;</span><span class="i">s</span>,<span onmouseout="hideTip(event, 'fs22', 66)" onmouseover="showTip(event, 'fs22', 66)" class="i">update</span><span class="o">:</span><span class="o">&#39;</span><span class="i">m</span><span class="k">-&gt;</span><span class="o">&#39;</span><span class="i">s</span><span class="k">-&gt;</span><span class="o">&#39;</span><span class="i">s</span>,<span onmouseout="hideTip(event, 'fs26', 67)" onmouseover="showTip(event, 'fs26', 67)" class="i">view</span>,<span onmouseout="hideTip(event, 'fs30', 68)" onmouseover="showTip(event, 'fs30', 68)" class="i">props</span>) <span class="k">as</span> <span class="i">self</span> <span class="o">=</span>
+    <span class="k">inherit</span> <span class="i">Component</span><span class="o">&lt;</span><span class="o">&#39;</span><span class="i">p</span>,<span class="o">&#39;</span><span class="i">s</span><span class="o">&gt;</span>(<span onmouseout="hideTip(event, 'fs30', 69)" onmouseover="showTip(event, 'fs30', 69)" class="i">props</span>) <span class="k">with</span>
+    <span class="k">do</span> <span class="i">self</span><span class="o">.</span><span class="i">setInitState</span> (<span onmouseout="hideTip(event, 'fs18', 70)" onmouseover="showTip(event, 'fs18', 70)" class="i">init</span> <span onmouseout="hideTip(event, 'fs30', 71)" onmouseover="showTip(event, 'fs30', 71)" class="i">props</span>)
+    <span class="k">member</span> <span class="i">__</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs22', 72)" onmouseover="showTip(event, 'fs22', 72)" class="i">update</span> <span class="i">msg</span> <span class="o">=</span>
+        <span class="k">let</span> <span class="i">state&#39;</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs22', 73)" onmouseover="showTip(event, 'fs22', 73)" class="i">update</span> <span class="i">msg</span> <span class="i">self</span><span class="o">.</span><span class="i">state</span>
+        <span class="i">self</span><span class="o">.</span><span class="i">setState</span> (<span class="k">fun</span> _ _ <span class="k">-&gt;</span> <span class="i">state&#39;</span>)
+    <span class="k">override</span> <span class="i">__</span><span class="o">.</span><span class="i">render</span>() <span class="o">=</span>
+        <span onmouseout="hideTip(event, 'fs26', 74)" onmouseover="showTip(event, 'fs26', 74)" class="i">view</span> <span class="i">self</span><span class="o">.</span><span class="i">state</span> <span class="i">self</span><span class="o">.</span><span onmouseout="hideTip(event, 'fs22', 75)" onmouseover="showTip(event, 'fs22', 75)" class="i">update</span>
+
+<span class="k">let</span> <span class="i">toComponent</span> <span onmouseout="hideTip(event, 'fs18', 76)" onmouseover="showTip(event, 'fs18', 76)" class="i">init</span> <span onmouseout="hideTip(event, 'fs22', 77)" onmouseover="showTip(event, 'fs22', 77)" class="i">update</span> <span onmouseout="hideTip(event, 'fs26', 78)" onmouseover="showTip(event, 'fs26', 78)" class="i">view</span> <span onmouseout="hideTip(event, 'fs30', 79)" onmouseover="showTip(event, 'fs30', 79)" class="i">props</span> <span class="o">=</span>
+    <span class="i">GenericComponent</span>(<span onmouseout="hideTip(event, 'fs18', 80)" onmouseover="showTip(event, 'fs18', 80)" class="i">init</span>,<span onmouseout="hideTip(event, 'fs22', 81)" onmouseover="showTip(event, 'fs22', 81)" class="i">update</span>,<span onmouseout="hideTip(event, 'fs26', 82)" onmouseover="showTip(event, 'fs26', 82)" class="i">view</span>,<span onmouseout="hideTip(event, 'fs30', 83)" onmouseover="showTip(event, 'fs30', 83)" class="i">props</span>)
+</code></pre></td>
+</tr>
+</table>
+</section>
+<section >
+<h1>Demo</h1>
+</section>
+</section>
+<section >
+<section >
+<h2>Word of Warning</h2>
+<ul>
+<li>This is not a well trodden path (yet)</li>
+<li>There may be bumps  🤜🤛</li>
+<li>The community is very helpful</li>
+<li>Find me on <a href="https://fsharp.slack.com/">F# Slack</a></li>
+</ul>
+</section>
+<section >
+<h1>Questions?</h1>
+</section>
+<section >
+<h2>The End</h2>
+<ul>
+<li>Slides at <a href="https://github.com/ericharding/SouthernFriedReact"><a href="https://github.com/ericharding/SouthernFriedReact">https://github.com/ericharding/SouthernFriedReact</a></a></li>
+</ul>
+</section>
+</section>
+
+
+        </div>
+    </div>
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+    <script>
+        // Add the nohighlight class and data-noescape attribute to code elements that have already been formatted by FSharp.Formatting
+        $('pre.highlighted code').addClass('nohighlight').attr('data-noescape', '');
+
+        // Full list of configuration options available here:
+        // https://github.com/hakimel/reveal.js#configuration
+        Reveal.initialize({
+            controls: true,
+            progress: true,
+            history: true,
+            center: true,
+
+            transition: 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+            // Parallax scrolling
+            // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+            // parallaxBackgroundSize: '2100px 900px',
+
+            // Optional libraries used to extend on reveal.js
+            dependencies: [
+                { src: 'lib/js/classList.js', condition: function () { return !document.body.classList; } },
+                { src: 'plugin/markdown/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                { src: 'plugin/markdown/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+                { src: 'plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } },
+                { src: 'plugin/zoom-js/zoom.js', async: true, condition: function () { return !!document.body.classList; } },
+                { src: 'plugin/notes/notes.js', async: true, condition: function () { return !!document.body.classList; } }
+            ]
+        });
+
+    </script>
+</body>
+</html>
+
