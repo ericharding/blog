@@ -15,7 +15,7 @@ Looking forward to next year!
 If you're local drop by the second Tuesday [F# meetup](https://www.meetup.com/Triangle-F/) and say hi some time.
 
 
-<iframe src="/southernfriedreact/slides/index.html" width="100%" height="500"> </iframe>
+<iframe src="/SouthernFriedReact/slides/index.html" width="100%" height="500"> </iframe>
 
 Samples and other content here:
 [https://github.com/ericharding/SouthernFriedReact](https://github.com/ericharding/SouthernFriedReact)
