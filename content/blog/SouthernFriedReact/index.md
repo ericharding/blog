@@ -20,6 +20,10 @@ If you're local drop by the second Tuesday [F# meetup](https://www.meetup.com/Tr
 Samples and other content here:
 [https://github.com/ericharding/SouthernFriedReact](https://github.com/ericharding/SouthernFriedReact)
 
-![me](b.jpg)
-![me](a.jpg)
+<br />
+
+
+[![me](b.jpg)](https://twitter.com/FriedFsharp/status/1117145411855224834)
+
+[![me](a.jpg)](https://twitter.com/StachuDotNet/status/1117140858523062278)
 
