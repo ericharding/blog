@@ -17,6 +17,8 @@ If you're local drop by the second Tuesday [F# meetup](https://www.meetup.com/Tr
 
 <iframe src="/southernfriedreact/slides/index.html" width="100%" height="500"> </iframe>
 
+Samples and other content here:
+[https://github.com/ericharding/SouthernFriedReact](https://github.com/ericharding/SouthernFriedReact)
 
 ![me](b.jpg)
 ![me](a.jpg)
