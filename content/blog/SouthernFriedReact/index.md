@@ -34,4 +34,5 @@ Samples and other content here:
 <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Truth. <a href="https://twitter.com/hashtag/fsharp?src=hash&amp;ref_src=twsrc%5Etfw">#fsharp</a> <a href="https://twitter.com/FriedFsharp?ref_src=twsrc%5Etfw">@FriedFsharp</a> <a href="https://t.co/LzX1XgpZB2">pic.twitter.com/LzX1XgpZB2</a></p>&mdash; Stachu Korick (@StachuDotNet) <a href="https://twitter.com/StachuDotNet/status/1117140858523062278?ref_src=twsrc%5Etfw">April 13, 2019</a></blockquote>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Thank you Alan Ball for making Southern ⁦<a href="https://twitter.com/FriedFsharp?ref_src=twsrc%5Etfw">@FriedFsharp</a>⁩ happen! After 5 months into starting the Raleigh <a href="https://twitter.com/hashtag/fsharp?src=hash&amp;ref_src=twsrc%5Etfw">#fsharp</a> Meetup, he really went above and beyond to make it a great event.  I&#39;m really looking forward to it next year! <a href="https://t.co/tryVpjs6wn">pic.twitter.com/tryVpjs6wn</a></p>&mdash; Steve Goguen (@sgoguen) <a href="https://twitter.com/sgoguen/status/1117468764725968896?ref_src=twsrc%5Etfw">April 14, 2019</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
