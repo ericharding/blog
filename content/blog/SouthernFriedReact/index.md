@@ -23,7 +23,15 @@ Samples and other content here:
 <br />
 
 
-[![me](b.jpg)](https://twitter.com/FriedFsharp/status/1117145411855224834)
+<!-- [![me](b.jpg)](https://twitter.com/FriedFsharp/status/1117145411855224834) -->
 
-[![me](a.jpg)](https://twitter.com/StachuDotNet/status/1117140858523062278)
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/digitalsorcery?ref_src=twsrc%5Etfw">@digitalsorcery</a> is doing some magic with fable! <a href="https://twitter.com/hashtag/fable?src=hash&amp;ref_src=twsrc%5Etfw">#fable</a> <a href="https://twitter.com/hashtag/fsharp?src=hash&amp;ref_src=twsrc%5Etfw">#fsharp</a> <a href="https://twitter.com/hashtag/friedfsharp?src=hash&amp;ref_src=twsrc%5Etfw">#friedfsharp</a> <a href="https://t.co/wr9wwLkTh2">pic.twitter.com/wr9wwLkTh2</a></p>&mdash; Southern Fried Fsharp (@FriedFsharp) <a href="https://twitter.com/FriedFsharp/status/1117145411855224834?ref_src=twsrc%5Etfw">April 13, 2019</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<!-- [![me](a.jpg)](https://twitter.com/StachuDotNet/status/1117140858523062278) -->
+
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Truth. <a href="https://twitter.com/hashtag/fsharp?src=hash&amp;ref_src=twsrc%5Etfw">#fsharp</a> <a href="https://twitter.com/FriedFsharp?ref_src=twsrc%5Etfw">@FriedFsharp</a> <a href="https://t.co/LzX1XgpZB2">pic.twitter.com/LzX1XgpZB2</a></p>&mdash; Stachu Korick (@StachuDotNet) <a href="https://twitter.com/StachuDotNet/status/1117140858523062278?ref_src=twsrc%5Etfw">April 13, 2019</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
 
