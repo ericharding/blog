@@ -12,3 +12,11 @@ This is a feature I've excited about so I thought I'd write a quick post explori
 <!-- more -->
 
 https://devblogs.microsoft.com/dotnet/announcing-net-core-3-0-preview-5/
+
+- building and running
+
+- Caution: subject to change:
+    - working directory
+    - loading local files/resources
+        - copy to output directory
+    - Loading native assemblies
