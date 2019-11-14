@@ -1,6 +1,7 @@
 +++
 title=".NET Core Single Executable"
 date=2019-05-17
+draft=true
 [taxonomies]
 tags=[".NET", "F#"]
 +++
