@@ -1,12 +1,15 @@
 +++
 title="Paket cheat sheet"
 date=2019-11-13
-draft=true
 [taxonomies]
 tags=[".NET", "F#"]
 +++
 
-A self-reference for common [paket](https://fsprojects.github.io/Paket/index.html) commands.
+A self-reference for common [Paket](https://fsprojects.github.io/Paket/index.html) commands.
+
+<!-- more -->
+
+There are some advantages to Paket over Nuget.  Right now I still prefer Nuget when starting projects but I can see how Paket would be advantageous for larger ones where the advanced dependency resolution would have a chance to shine.  There are a also lot of open source F# projects and templates that use Paket so it's useful to have a working knowledge of it.
 
 ## Install
 ```
@@ -35,19 +38,35 @@ dotnet paket restore
 ```
 
 
-## Update installed packages
+## Update Installed Packages
+
+List packages that have an update available.
+
+```
 dotnet paket outdated
+```
+
+Update all installed packages.
+```
 dotnet paket update
+```
 
 
-## Add a group
+## Add a Group
+
+[Groups documentation](https://fsprojects.github.io/Paket/groups.html)
 
 ```
 echo "group [NAME]" >> paket.dependencies
 dotnet paket install
 ```
 
-## Add package to a group
+To list the groups the application uses
+```
+dotnet paket show-groups
+```
+
+## Add Package To a Group
 ```
 dotnet paket add [NAME] -g [GROUP]
 ```
