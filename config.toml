@@ -13,7 +13,7 @@ hyde_sticky = true
 hyde_reverse = false
 hyde_links = [
     {url = "/about/", name = "About", icon="fas fa-id-badge"},
-    {url = "http://hardingtech.net/resume.html", name = "Resume", icon="fas fa-pencil-alt" },
+    {url = "http://hardingtech.net/resume/", name = "Resume", icon="fas fa-pencil-alt" },
     {url = "https://github.com/ericharding/", name = "Github", icon="fab fa-github-square" },
     {url = "https://www.linkedin.com/in/erharding/", name="Linkedin", icon="fab fa-linkedin"},
     #{url = "https://hardingtech.net/", name="Harding Technology LLC", icon="fas fa-briefcase"},

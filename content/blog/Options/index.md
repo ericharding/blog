@@ -54,4 +54,5 @@ At BTS there are two classes of market data consumer. Machines and humans. While
 * Recording
 * What happened first
 
-
+## References
+MESI - https://en.wikipedia.org/wiki/MESI_protocol
