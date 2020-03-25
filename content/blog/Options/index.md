@@ -46,7 +46,7 @@ Your super-fast trading engine only needs to watch for price changes on securiti
 
 Monitors only refresh at about 60Hz, so there's absolutely **no point** in delivering hundreds of updates per second that you'll literally never see.  I've seen multiple trading systems over the years that try to push every update down to the UI.  The developers spend a lot of time tuning for performance only to have the application fall over when the market heats up and they see a sudden increase in updates.  
 
-Another common failure mode is a network glitch.  If you're trying to process all of the updates as they come in but your WiFi drops, you get a flood of updates to process when it reconnects.  The UI can fall behind the market for seconds or tens of seconds while displaying out of date information.
+Another common failure mode is a network glitch.  If you're trying to process all of the updates as they come in but your WiFi drops, you get a flood of updates when it reconnects.  The UI can fall behind the market for seconds or tens of seconds while displaying out of date information.
 
 
 # The Solution
