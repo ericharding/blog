@@ -1,8 +1,8 @@
 +++
 title="Efficient Load Shedding for Options Market Data"
-date=2020-03-20
+date=2020-03-25
 [taxonomies]
-tags=[".NET", "F#"]
+tags=["performance", "c++"]
 +++
 
 Handling financial data from an exchange is a fascinating problem.  The data from a single exchange can include tens of thousands of updates every second, typically in the form of UDP multicast.  Access to the real-time feed can cost thousands of dollars, but data becomes near worthless seconds (or fractions of a second) after transmission.
@@ -134,6 +134,8 @@ The obvious drawback to optimistic locking is that it only works efficiently if 
 
 To keep the data under the lock small I divide the memory for market data into "hot" and "cold" memory segments.  The hot segment contained information read multiple times a second.  This structure needs to be small, so we have a high likelihood of keeping it in CPU cache for the trading engines.  The cold segment has less latency-sensitive data and is generally not read under an optimistic lock. The details of the security, for example, are stored in the cold section and treated as immutable.
 
+As a future optimization, I could see splitting the data up into more sections depending on the needs of the data consumers.  For example, it might make sense to store the top of the book separately from the level book so the consumer could choose which block to copy.
+
 ## User Interface
 
 One really interesting aspect of this pattern is with regard to user interfaces.  Our ladder now runs at a **fixed** frame rate.  We decide how often the ladder refreshes, and we run and test at exactly that frequency.  The client queries the server at a fixed interval and always gets the most recent values. This makes the BTS UI far more resilient to high volume market data than most other professional trading interfaces.
@@ -143,23 +145,37 @@ One really interesting aspect of this pattern is with regard to user interfaces.
 Software performance is about tradeoffs.  As the saying goes, "the fastest code is no code" but if "no code" solves your problem then, well, I'm not sure how you got here.
 
 ## Pro
-#### You _always_ get the latest value when you ask.
+#### You _always_ get the latest value when you ask
 You never have to worry about being behind the market.
 
-#### The consumer determines the rate of updates.
+#### The consumer determines the rate of updates
 This provides a safety net for fast moving market data which might otherwise overload consumers
+
+#### A snapshot of the market is always available
+With the solution it is trivial for a new consumer process to join compared to an incremental feed which might need to send a snapshot of the current state over a separate channel.
+
+#### Using the `updated` timestamp you can compute the minimal update from previous state
+It is trivial to query the market data for changes since a particular timestamp.  You can use this to send only the changed books across the network on each request.  The client only needs to keep the timestamp of the previous request.
 
 ## Con
 #### You cannot reliably record tick-by-tick data.
-If you want to record market data for later analysis you either have to tolerate that some information will be lost or look 
+If you want to record market data for later analysis you either have to tolerate that some information will be lost or use a different solution.
 
 #### You lose _some_ ability to correlate between different events.
 If you need to know that security A updated before security B down to the nanosecond you may need a different solution.
 
-#### Larger working set
-If you don't need to keep a snapshot of the last value for every security you can save memory using a queue
+#### This solution may require more memory
+If you don't need to keep a snapshot of the last value for every security you can save some memory using a queue. 
 
+#### The data under the optimistic copy needs to be small
+For optimistic locking to be effective the amount of data you need in your hot path must be fairly small. The retry mechanism does not scale linearly with larger data.
+
+#### Your customers may expect a streaming API
+Polling for market data isn't intuitive to a lot of developers who expect a callback when data changes.  If you have customers outside of your company a streaming API may have lower support cost.
 
 # Conclusion
 
+Thanks for reading this far!  It took a bit longer than I expected to get all the details down.
+
+Using a static address for the data for each security works exceptionally well for our use cases.  If I had to highlight my favorite aspect of this approach, I think it would be the level of resilience that it gives to market data load.  When market activity increases, it can mean a 2-10x increase in updates, which can be very difficult to test.  Attempting to replay market data at an accelerated rate doesn't give the same spiky load characteristics as a real fast-moving market.  With this architecture, the code that has to be able to handle the spike of traffic is isolated to the thread parsing network packets and storing the data.  Everything on the read side of the fixed memory block automatically scales to the rate it can handle.
 
