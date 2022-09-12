@@ -1,14 +1,18 @@
+
+1. How to enable etw tracing for your client apps
+2. "code ninjas" for my own kids
+  - scip - dynamic types
+3. 
+
+
+=========================
 * Mozilla bug (etw)
-* How start a blog? (zola)
-* super low latency performance tracing
-* AI personal accounting
+* How start a blog? (zola / self help)
+* 
 
-
-* Conference - PublishingFableReactComponent
 * Null as wishful programming
 * Elmish tutorial series
   - can I use zola shortcodes to switch language examples?
-* why Digitalsorcery
 
 * Using ML for bookkeeping
  -- http://www.codesuji.com/2018/06/23/F-and-MLNet-Classification/
