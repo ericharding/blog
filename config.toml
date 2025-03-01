@@ -5,6 +5,9 @@ build_search_index = false
 generate_feeds = true
 title = "Blog"
 description = "Essential Complexity"
+taxonomies = [
+    { name = "tags", feed = true},
+]
 
 [extra]
 hyde_sticky = true
