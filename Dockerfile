@@ -1,5 +1,5 @@
 # Stage 1: Build the site with Zola
-FROM alpine:3.21.3 as builder
+FROM alpine:3.21.9 as builder
 
 # Install Zola
 RUN apk add --no-cache zola=0.19.2-r0
