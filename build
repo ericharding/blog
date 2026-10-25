@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# Build the next versioned image, push it (+ :latest) to the registry, and
+# record the new version in version.txt. Usage: ./build
+set -euo pipefail
+
+cd "$(dirname "$(realpath "${BASH_SOURCE[0]}")")"
+
+IMAGE=registry.digitalsorcery.net/www-blog
+NEXT="v$(($(tr -d 'v[:space:]' < version.txt) + 1))"
+
+podman build --pull=always -t "$IMAGE:$NEXT" -t "$IMAGE:latest" .
+podman push "$IMAGE:$NEXT"
+podman push "$IMAGE:latest"
+echo "$NEXT" > version.txt
+
+echo "Pushed $IMAGE:$NEXT"
